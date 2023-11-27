@@ -23,6 +23,13 @@ incremental: true
 
 # RNA structure description
 
+## Slides 
+
+Slides are available at:
+
+https://evryrna.github.io/rna_3d_bioinfo_m2_geniomhe/
+
+
 ## Nucleotides 
 
 ![Nucleotide description adapted from [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/d/d3/0322_DNA_Nucleotides.jpg)](img/nucleotide.png){width="50%"}
