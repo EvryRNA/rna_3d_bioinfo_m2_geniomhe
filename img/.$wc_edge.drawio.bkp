@@ -1,0 +1,34 @@
+<mxfile host="Electron" modified="2023-11-23T10:48:20.062Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="6VktkD4KS5J8EmDN-vMx" version="22.0.3" type="device">
+  <diagram name="Page-1" id="TIuLIhR4Lm4KDwRkZIUI">
+    <mxGraphModel dx="1026" dy="-55" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-1" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.orthogonal_triangle;fontFamily=Garamond;flipV=0;flipH=1;fillColor=#999999;fontColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="120" y="980" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-2" value="H" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;flipV=0;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="171" y="1010" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-3" value="SUGAR" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;flipV=0;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="175" y="1029" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-4" value="W-C" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;rotation=-90;flipV=0;flipH=1;" vertex="1" parent="1">
+          <mxGeometry x="196" y="1011" width="27" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-5" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.orthogonal_triangle;fontFamily=Garamond;" vertex="1" parent="1">
+          <mxGeometry x="225" y="980" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-6" value="H" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;" vertex="1" parent="1">
+          <mxGeometry x="259" y="1011" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-7" value="SUGAR" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;" vertex="1" parent="1">
+          <mxGeometry x="248" y="1029" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vIwkc0Du4A50UCcR0v5T-8" value="W-C" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontFamily=Garamond;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="218" y="1011" width="27" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

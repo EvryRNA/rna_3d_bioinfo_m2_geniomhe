@@ -1,0 +1,620 @@
+---
+title: "RNA 3D structures"
+subtitle: "M2 - GENIOMHE"
+author: Clément Bernard
+date: today
+format:
+  revealjs: 
+    # theme: serif
+    theme: [default, custom.scss]
+    transition: slide
+    transition-speed: fast
+    slide-number: c/t
+footer: "[RNA 3D structures comprehension]()"
+logo: https://www.ibisc.univ-evry.fr/wp-content/uploads/2020/07/logo_ibiscsaclay.png
+execute:
+  echo: true
+css: style.css
+jupyter: python3
+bibliography: references.bib
+incremental: true
+---
+
+
+# RNA structure description
+
+## Nucleotides 
+
+![Nucleotide description adapted from [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/d/d3/0322_DNA_Nucleotides.jpg)](img/nucleotide.png){width="50%"}
+
+## Nucleotides chain
+
+![Adaptation of [article](https://www.genome.gov/genetics-glossary/RNA-Ribonucleic-Acid): description of RNA molecular components](img/rna_schema.drawio.png){width="90%"}
+
+
+## RNA edges
+
+![RNA edges where H-bonded pairs can form](img/rna_edges.drawio.png)
+
+## RNA edges 
+
+![All possible interactions (cis, trans, parallel, antiparallel)](img/rna_all_edges.drawio.png)
+
+
+## RNA base pairs
+
+- Given orientations, the edges and base pairing, there are more than **200** possible base pairs.
+
+- The standard WC base pair corresponds to the cis WC/WC pairing. 
+
+. . . 
+
+![](img/wc_edge.drawio.png){width="50%" fig-align="center"}
+
+- Non-standard interactions play a crucial role in the RNA folding process
+
+## RNA dihedral angles
+
+![](img/all_angles.drawio.png){width=100% fig-align="center"}
+
+## RNA 3D structure
+
+![](img/pred_rp14f_w_trans.png){fig-align="center"}
+
+RNA 3D structures are complex and involve a lot of different interactions
+
+# RNA 3D structures prediction
+
+## RNA 3D structures prediction
+
+- Solved structures are stored in the [PDB](https://www.rcsb.org/)
+
+. . .
+
+![](img/pdb_all_rnas.png){width="80%" fig-align="center"}
+
+## RNA 3D structures prediction
+
+![Example of RNA page on PDB](img/pdb_one_rna.png){fig-align="center"}
+
+## RNA 3D structures prediction
+
+![Each RNA 3D structure is the result of hard work](img/pdb_article.png){fig-align="center"}
+
+
+
+# Experimental methods 
+
+## Experimental methods 
+### Macromolecular X-ray crystallography (MR)
+
+- Most widely used technique
+- A crystal is exposed to an X-ray beam. 
+- Diffraction images are collected with rotation of the crystal. 
+- Application of inverse Fourier to find strucutre
+
+## Experimental methods 
+### Nuclear magnetic resonance (NMR)
+
+- Observe local magnetic fields around atom and measure interactions between them
+- Atoms carry magnetic that take various orientations characterized by different energies when applied to magnetic field. 
+
+## Experimental methods 
+
+### Electron microscopy (EM)
+
+- Rely on the constrast formed by the interaction of incoming electrons 
+- Multiple 2D projection images of randomly oriented molecules are recorded
+- 3D density map is computationally combined
+
+## Experimental methods 
+![](img/experimental_methods.png){fig-align="center"}
+
+## Experimental methods 
+
+- Experimental methods exist but are laborious and of high cost (in **time** and **money**)
+
+- Computational methods aim to predict RNA 3D structures with high throughput
+
+. . .
+
+**Question**: How to compute RNA 3D structures ? 
+
+# RNA 3D structures prediction
+
+## RNA 3D structures prediction
+
+### General pipeline 
+
+Models that predict RNA 3D structures use this general workflow: 
+
+- Generate RNA 3D candidates 
+- Selection of good candidates (structure evaluation)
+- Refinement: relaxe the structures 
+- Final prediction: return either the best structure or multiple structures
+
+## RNA 3D structures prediction
+
+Methods can be divided into 3 classes: 
+
+- ***Ab initio*** (physics-based): use of thermodynamic and physics
+- **Template-based**: use of fragment assembly
+- **Deep learning**
+
+# Ab initio
+## Ab initio
+
+- Rely on the fact that native structures are those states with the lowest energies for RNAs
+- The energy used usually consider **dihedral angles**, **bond length**, **base pairing**, ...
+- Use a **generation** process and a **discriminator**
+- Use Monte Carlo or molecular dynamics (MD) sampling procedures
+
+## Ab initio
+### Coarse-grained 
+
+- All-atom simulation can be time-consuming
+- Use of coarse-grained to reduce computation time 
+
+. . . 
+
+![](img/cg.png){fig-align="center" width="50%"}
+
+
+## Ab initio
+### RNAJP granularity
+
+- 5 pseudoatoms (beads) to represent a nucleotide
+
+. . . 
+
+![](img/rnajp_nucleotides.png){fig-align="center" width="40%"}
+
+## Ab initio
+###  RNAJP granularity
+
+- Use the 2D structure to represent CG helix as A-form helix
+
+. . .
+
+![](img/rnajp_helix.png){fig-align="center" width="40%"}
+
+
+## Ab initio
+### RNAJP force-field
+
+- Force-field uses 12 terms:
+$$
+E_{total} = E_{bond} + E_{angle} + E_{torsion} + \\
+            E_{base-pairing} + E_{base-stacking} + \\ 
+            E_{excluded-volume} + \\
+            E_{A helix} + E_{helix-helix}+ E_{junction-compact} + \\
+            E_{JAR3D} + E_{loop-loop} + \\
+            E_{PK stacking}
+$$
+
+
+## Ab initio
+### RNAJP force-field
+
+- $E_{bond} + E_{angle} + E_{torsion}$: bonded interactions in terms of bond length, angle and torsion
+- $E_{base-pairing} + E_{base-stacking}$: important base pairing and base stacking interactions
+- $E_{excluded-volume}$: avoid steric clashes between beads
+- $E_{A helix} + E_{helix-helix}+ E_{junction-compact}$: use to accelerate the conformational sampling
+
+
+## Ab initio
+### RNAJP force-field
+
+- $E_{JAR3D} + E_{loop-loop}$: describe the intraloop and interloop interactions
+- $E_{PK stacking}$: describe the stacking interaction between the pseudoknotted (PK) helix and its adjacent non-pseudoknotted (nonPK) helix
+
+
+## Ab initio
+### RNAJP sampling
+
+- Sampling procedure: molecular dynamics (MD) 
+- Procedure: 
+    - Generate an initial 3D structure
+    - Fold the helices in the given 2D structure 
+    - Fold the hairpin and internal loop structures 
+    - Sample different junction topologies and junction loop structures
+
+## Ab initio
+### RNAJP: model selection
+
+- Select the lowest-energy structure as the first predicted model
+- Among a pool of top 1% low energy, select the structure with the largest RMSD from previous selected structure
+- Select the structure among the top 1% low-energy structures with the largest sum of RMSDs relative to the first and second models as the third model
+- Continue until N predictions
+
+
+## Ab initio
+### RNAJP: all-atom reconstruction
+
+- CG beads aligned in the standard base
+- Selection of reconstructed atoms after superimposition
+
+
+## Ab initio
+### RNAJP: refinement
+
+- Fix the broken bonds and remove steric clashes using QRNAS (@qrnas)
+
+
+## Ab initio
+### Limits
+
+- Limited by the sequence length (increase computation time) 
+- Require efficient sampling function (to avoid useless computation)
+- Methods usually slow 
+
+
+# Template-based
+
+## Template-based
+
+- Creation of 3D structures from known structures (templates) 
+- Use of fragment mapping between 2D and 3D
+- Align the target sequence to the template
+- Structure evaluation to choose the best candidate
+
+
+## Template-based
+### Granularity 
+
+- Looking to template at the nucleotide level is time consuming
+- Sample the space not at the atom level but at the level of basic block
+
+## Template-based
+### Granularity 
+- Basic blocks can be:
+    - Three-nucleotides (used in FARNA)
+    ![](img/tp_3nt.png){fig-align="center" width="50%"}
+
+## Template-based {transition="none"}
+### Granularity 
+:::{.nonincremental}
+- Basic blocks can be:
+    - Three-nucleotides (used in FARNA)
+    - Smallest Secondary Elements (SSEs)
+:::
+
+![](img/tp_sses.png){fig-align="center" width="50%"}
+
+## Template-based
+### Example: 3dRNA
+
+![](img/3drna_workflow.png){fig-align="center"}
+
+
+## Template-based
+### Example: 3dRNA
+
+- Assembled structures are clustered by K-means
+- Use RMSD values to do the clustering 
+- Centroids of each cluster are evaluated by 3dRNAscore
+
+## Template-based
+### Limits
+
+- Rely on representative templates
+- Fail to generalise to unseen structures
+- Limited by the number of available RNA
+
+# Towards deep-learning
+
+## Towards deep-learning
+### Proteins 
+
+- AlphaFold 2(Jumper et al., 2021) has successfully predicted protein 3D structures
+
+. . .
+
+![](img/alphafold.png)
+
+
+## Towards deep-learning
+### Proteins 
+AlphaFold not adapted to RNAs:
+
+- RNAs composed of nucleotides (compared to amino acid)
+- Disparity in length for RNAs
+- Multiple structures possible for RNAs
+- Fewer structures available
+- AlphaFold is based on Multiple Sequence Alignment (MSA), but not all RNA families are known
+
+## Deep learning
+
+- Recent works try to reproduce AlphaFold
+- Remain limited: works not published (only preprint)
+
+::: {.r-stack}
+![](img/preprint_0.png){.absolute top=350 left=100 .fragment width="450" height="300"}
+![](img/preprint_1.png){.absolute top=300 left=120 rigth=20 .fragment width="850" height="300"}
+![](img/preprint_2.png){.absolute top=350 rigth=20 .fragment width="450" height="300"}
+![](img/preprint_3.png){.absolute top=350 left=80 rigth=20 .fragment width="450" height="300"}
+:::
+
+## Deep learning 
+### Example: DRfold
+
+![](img/preprint_3.png){fig-align="center"}
+
+- Example of work published that had good performances on a recent challenge
+
+## Deep learning 
+### DRfold atom representation
+
+![](img/drfold_cg.png){fig-align="center"}
+
+## Deep learning 
+### DRfold architecture
+
+![](img/drfold_architecture.png){fig-align="center"}
+
+## Deep learning 
+### DRfold embedding
+
+![](img/drfold_emb.png){fig-align="center"}
+
+## Deep learning 
+### DRfold transformer
+
+![](img/drfold_transformer.png){fig-align="center"}
+
+## Deep learning 
+### DRfold structure
+
+![](img/drfold_structure.png){fig-align="center"}
+
+## Deep learning 
+### DRfold geometry
+
+![](img/drfold_geometry.png){fig-align="center"}
+
+
+## Deep learning 
+### DRfold FAPE
+
+![](img/drfold_fape.png){fig-align="center"}
+
+## Deep learning 
+### DRfold loss
+
+$$
+L_{e2e} = 1.5 L_{FAPE} + 0.6L_{dist}
+$$
+
+with 
+$$
+L_{dist} = - \sum_{i,j} \sum_{b=1}^{36} y_{ij}^b \log p_{ij}^b
+$$
+
+$y_{ij}^b$ assesses if the distance of atom pair $(i, j)$ in the target experimental structure falls into the $b$-th distance
+
+## Deep learning
+### DRfold: dataset
+
+- Training set of 3864 unique RNAs extracted from the PDB
+- Test set on 40 non-redundant RNAs
+- RNA length from 14 to 392 nucleotides
+
+## Deep learning 
+### DRfold: results
+
+![](img/drfold_results.png){fig-align="center"}
+
+
+## Deep learning
+### DRfold
+
+- Use of full-atom reconstruction
+- Training took 2 weeks on Nvidia A40 GPUwith 32GB of memory
+- RNA sequences of 200 nucleotides maximum
+- **Doesn't use MSA nor self-distillation**
+
+## Deep learning
+### Limits
+
+- Overall performance of deep learning approaches still to be improved
+- Lack of sufficient solved structures
+- Interpretation of the model
+- Integration of environment conditions (ions ?)
+
+
+# RNA quality measurement
+## RNA quality measurement
+
+![](img/1d_2d_3d_evaluation.drawio.png){width=200%}
+
+- Evaluation of raw sequence or 2D structure is accessible (F1-score, MCC, ...)
+- RNA 3D structures are complex objects: hard to evaluate (pairing, geometries, etc)
+
+## RNA quality measurement
+
+![](img/rp14f_pred.drawio.png){width=20% fig-align="center"}
+
+**Given a structure, how to assess its quality ?**
+
+## Metrics
+### Definition
+:::: {.columns }
+
+::: {.column width="50%" }
+
+#### Predicted structure
+![](img/rp14f_pred.drawio.png){width=50% fig-align="center"}
+:::
+
+::: {.column width="50%" }
+
+#### Reference structure
+![](img/ref_rp14f.drawio.png){width=50% fig-align="center"}
+
+:::
+::::
+
+**Metrics**: Quality measurement given a solved structure
+
+## Metrics 
+### General metrics
+
+- **RMSD**: Atom deviation 
+- **CLASH** (@molprobity): Steric clashes     
+- **$\epsilon$RMSD** (@barnaba): Relative distance
+
+## Metrics 
+### Protein-based 
+
+- **GDT-TS** (@gdt): Superimposed residues 
+- **TM-score** (@tm-score-rna): Largest deviation 
+- **lDDT** (@lddt): Interatomic distance 
+- **CAD-score** (@cad-score): Contact-area 
+
+## Metrics 
+### RNA-oriented
+
+- **INF, DI** (@inf): Key interactions accuracy 
+- **P-VALUE** (@p-value): Non-randomness
+- **MCQ** (@mcq): Angle deviations
+
+## Metrics
+### Example: Interaction Network Fidelity
+
+$$
+INF = \sqrt{( \frac{TP}{TP+FP}) \times (\frac{TP}{TP + FN})}
+$$
+with TP the true positive of the considered interactions 
+
+- When the model reproduces exactly the reference interactions,
+|TP| > 1 and FP = FN = 0.  -> The INF value equals 1
+
+## Metrics
+### Example: Interaction Network Fidelity
+- If none of the interactions of the reference is reproduced in
+the predicted model, |TP| = 0, and the INF score equals 0. 
+
+- INF score can be specific to base-pairing interactions ($INF_{bp}$), the base stacking interactions
+($INF_{stack}$), or consider both ($INF_{all}$ )
+
+
+## Metrics
+
+- Metrics help to evaluate a prediction given a solved structure
+- No universal metric exists: RMSD is mainly used (but sensible to outliers)
+
+- **Metrics requires having a solved structure, which is not available when model development**
+
+
+# Scoring functions
+## Scoring functions
+
+![](img/scoring_fig.drawio.png){fig-align="center" width=105%}
+
+ 
+- When developing models, a lot of structures can be generated and should be ranked
+- Ranking can be used to return multiple structures
+
+. . . 
+
+**Scoring function**: predict the quality of a structure **without a known reference**
+
+## Scoring functions
+### Knowledged based
+
+Scoring function based on knowledge-based statistical potentials
+
+- **RASP** (@rasp): Pairwise-distances
+- **$\epsilon$SCORE** (@barnaba): Relative positions
+- **3dRNASCORE** (@3drnascore): Distance/dihedral angles
+- **DFIRE-RNA** (@dfire-rna): Pairwise-distances
+- **rsRNASP** (@rsrnasp): Short/long pairwise distances
+
+
+## Scoring functions
+### Deep learning based
+
+Scoring functions based on deep learning architectures
+
+- **RNA3DCNN** (@rna3dcnn): Atom grid
+- **ARES** (@ares): Atom position/chemical type
+
+## Scoring functions
+### Example: RNAD3DCNN
+
+- Predict for each nucleotide an unfitness score
+- The unfitness is based on the RMSD of its surroundings and its RMSD 
+- A score of 0 means the nucleotide fits into its environment perfectly (native conformation)
+- For global quality assessment, the unfitness scores of all nucleotides are accumulated
+
+## Scoring functions
+### RNAD3DCNN: inputs
+
+- For each nucleotide, a box of 3 channels represents:
+    - Atomic occupation number
+    - Mass
+    - Charge within the grid box
+- A box is of size 32x32x32
+- The RGB channels are mapped to the three channels
+
+## Scoring functions
+### RNAD3DCNN: inputs
+
+![](img/rna3dcnn_inputs.png){fig-align="center"}
+
+## Scoring functions
+### RNAD3DCNN: architecture
+
+![](img/rna3dcnn_architecture.png){fig-align="center"}
+
+
+## Scoring functions
+### RNAD3DCNN: dataset
+
+- Use of 619 non-redundant RNAs from NDB website
+- Training done on two different datasets:
+    - **MD dataset**: a simulated annealing molecular dynamics simulation was done to each RNA 
+    - **MC dataset**: fragment assembly method, MC process guided by a low-resolution knowledge-based energy function
+- 1 million training samples and 0.2 million validation for each subdataset
+
+
+## Scoring functions
+### RNAD3DCNN: results
+
+![Relationship between RMSD and RNA3DCNN for an RNA](img/rna3dcnn_results.png){fig-align="center"}
+
+
+## Scoring functions
+### RNAD3DCNN: results
+
+![Number of native structures with minimum scores](img/rna3dcnn_testset.png){fig-align="center"}
+
+
+## Scoring functions
+### RNAD3DCNN
+
+- Try to reproduce RMSD with deep learning approaches
+- Inspired by CNN image-based models
+
+### Limits
+
+- Deep learning limits: require huge dataset, black box
+- Training step biased by the sampling procedures 
+- Performances remain limited to novel approaches
+
+## Questions ? 
+
+Contact: clement.bernard@univ-evry.fr
+
+Come to see my poster on Monday 4th, December
+
+![](img/rnadvisor.png){fig-align="center"}
+
+## References
+
+<!-- ## Project proposal
+
+Torsion angle definition
+Link between sequence and torsion angle: SPOT-RNA
+Torsion angle distribution
+Project: predict torsional discretized space from the sequence -->
