@@ -29,10 +29,58 @@ Slides are available at:
 
 https://evryrna.github.io/rna_3d_bioinfo_m2_geniomhe/
 
+## Gene expression
+
+![Only 2% of DNA is transcripted into mRNA and then into proteins.](img/transcription_gif.gif){width="120%"}
+
+## RNA roles
+
+
+
+::: {.columns}
+::: {.column width="30%"}
+![](img/4L8R_mRNA.gif){width="100%"}
+:::
+
+::: {.column width="70%"}
+- RNA biological function is directly linked to its **3D structure**
+- RNAs are molecules involved in multiple biological processes, including **diseases**
+- RNA 3D structure could be an interest in RNA therapy
+- Experimental methods are costly → Need of computational methods
+:::
+:::
+
+## RNA sequence
+
+![](img/raw_structure.png){width="50%" height="50%" fig-align="center"}
+
+- RNA is composed of 4 different nucleotides
+- Linear combination of nucleotides gives its raw sequence
+
+
+## RNA 2D structure
+
+![](img/all_2d_structures.png){width="100%" fig-align="center"}
+
+- Interactions between complementary base pairs (AU, CG and GU)
+- Watson-Crick and Wobble interactions
+
+## RNA 3D structure
+
+![](img/4L8R_mRNA.gif){width="100%" fig-align="center"}
+
+- RNA 3D structure describes the complete folding and spatial arrangement
+
+## RNA structures
+
+![](img/raw_2d_3d.gif)
+
+- 3D structure is constrained by 2D, which is constrained by raw sequence
+
 
 ## Nucleotides 
 
-![Nucleotide description adapted from [Wikipedia](https://upload.wikimedia.org/wikipedia/commons/d/d3/0322_DNA_Nucleotides.jpg)](img/nucleotide.png){width="50%"}
+![Nucleotide description](img/nucleotide_description.png){width="50%"}
 
 ## Nucleotides chain
 
@@ -41,7 +89,7 @@ https://evryrna.github.io/rna_3d_bioinfo_m2_geniomhe/
 
 ## RNA edges
 
-![RNA edges where H-bonded pairs can form](img/rna_edges.drawio.png)
+![RNA edges where H-bonded pairs can be formed](img/rna_edges.drawio.png)
 
 ## RNA edges 
 
@@ -58,17 +106,13 @@ https://evryrna.github.io/rna_3d_bioinfo_m2_geniomhe/
 
 ![](img/wc_edge.drawio.png){width="50%" fig-align="center"}
 
-- Non-standard interactions play a crucial role in the RNA folding process
-
-## RNA dihedral angles
-
-![](img/all_angles.drawio.png){width=100% fig-align="center"}
+- Non-standard interactions are crucial in RNA structure
 
 ## RNA 3D structure
 
-![](img/pred_rp14f_w_trans.png){fig-align="center"}
+![](img/4L8R_mRNA.gif){fig-align="center"}
 
-RNA 3D structures are complex and involve a lot of different interactions
+RNA 3D structures are complex and involve a lot of different interactions 
 
 # RNA 3D structures prediction
 
@@ -78,7 +122,7 @@ RNA 3D structures are complex and involve a lot of different interactions
 
 . . .
 
-![](img/pdb_all_rnas.png){width="80%" fig-align="center"}
+![](img/pdb_all_rnas.png){width="60%" fig-align="center"}
 
 ## RNA 3D structures prediction
 
@@ -148,6 +192,10 @@ Methods can be divided into 3 classes:
 - **Template-based**: use of fragment assembly
 - **Deep learning**
 
+## Type of inputs
+
+![Type of inputs usually used to predict RNA 3D structures.](img/timeline_all_papers.drawio.png)
+
 # Ab initio
 ## Ab initio
 
@@ -156,34 +204,33 @@ Methods can be divided into 3 classes:
 - Use a **generation** process and a **discriminator**
 - Use Monte Carlo or molecular dynamics (MD) sampling procedures
 
+
+## RNA dihedral angles
+
+![](img/all_angles.drawio.png){width=100% fig-align="center"}
+
+
+
 ## Ab initio
 ### Coarse-grained 
+
+![](img/rotation_per_nucloetide.drawio.png){fig-align="center" width="100%"}
+
 
 - All-atom simulation can be time-consuming
 - Use of coarse-grained to reduce computation time 
 
-. . . 
 
-![](img/cg.png){fig-align="center" width="50%"}
 
 
 ## Ab initio
 ### RNAJP granularity
 
-- 5 pseudoatoms (beads) to represent a nucleotide
-
-. . . 
-
 ![](img/rnajp_nucleotides.png){fig-align="center" width="40%"}
 
-## Ab initio
-###  RNAJP granularity
+- 5 pseudoatoms (beads) to represent a nucleotide
 
-- Use the 2D structure to represent CG helix as A-form helix
 
-. . .
-
-![](img/rnajp_helix.png){fig-align="center" width="40%"}
 
 
 ## Ab initio
@@ -231,6 +278,11 @@ $$
 
 - Select the lowest-energy structure as the first predicted model
 - Among a pool of top 1% low energy, select the structure with the largest RMSD from previous selected structure
+
+
+## Ab initio
+### RNAJP: model selection
+
 - Select the structure among the top 1% low-energy structures with the largest sum of RMSDs relative to the first and second models as the third model
 - Continue until N predictions
 
@@ -315,14 +367,13 @@ $$
 
 - AlphaFold 2(Jumper et al., 2021) has successfully predicted protein 3D structures
 
-. . .
 
 ![](img/alphafold.png)
 
 
 ## Towards deep-learning
 ### Proteins 
-AlphaFold not adapted to RNAs:
+AlphaFold was not adapted to RNAs:
 
 - RNAs composed of nucleotides (compared to amino acid)
 - Disparity in length for RNAs
@@ -333,14 +384,10 @@ AlphaFold not adapted to RNAs:
 ## Deep learning
 
 - Recent works try to reproduce AlphaFold
-- Remain limited: works not published (only preprint)
+- New release of AlphaFold 3 for DNA, ligand, ion and **RNA**.
 
-::: {.r-stack}
-![](img/preprint_0.png){.absolute top=350 left=100 .fragment width="450" height="300"}
-![](img/preprint_1.png){.absolute top=300 left=120 rigth=20 .fragment width="850" height="300"}
-![](img/preprint_2.png){.absolute top=350 rigth=20 .fragment width="450" height="300"}
-![](img/preprint_3.png){.absolute top=350 left=80 rigth=20 .fragment width="450" height="300"}
-:::
+![](img/af3_screen.png){fig-align="center"}
+
 
 ## Deep learning 
 ### Example: DRfold
@@ -379,6 +426,23 @@ AlphaFold not adapted to RNAs:
 
 ![](img/drfold_geometry.png){fig-align="center"}
 
+
+## Deep learning
+### Rotation/translation
+
+![](img/rot_reconstruction_base.png){fig-align="center"}
+
+- Predict Euclidean transformation from base frame to global position
+
+## Deep learning
+### Rotation/translation
+
+![](img/rot_reconstruction.gif){fig-align="center"}
+
+## Deep learning
+### Rotation/translation
+
+![](img/cg_and_full.gif){fig-align="center"}
 
 ## Deep learning 
 ### DRfold FAPE
@@ -429,17 +493,172 @@ $y_{ij}^b$ assesses if the distance of atom pair $(i, j)$ in the target experime
 - Integration of environment conditions (ions ?)
 
 
+# AlphaFold 3
+
+## AlphaFold 2 architecture
+
+![](img/af2_screen.png){fig-align="center"}
+
+- Use attention-based methods with MSA as inputs
+- Use of recycling methods
+- Predict rotation/translation vectors and torsional angles
+
+## AlphaFold 2 output
+
+![](img/protein_angles.png){width="50%" height="50%" fig-align="center"}
+
+- Torsional angles are specific to proteins and not adaptable to RNAs
+
+## AlphaFold 3
+
+![](img/af3_architecture.png){fig-align="center" }
+
+- New architecture generalisable to different molecules
+- Add diffusion methods to replace prediction of rotation/translation vectors
+
+## AlphaFold 3
+### Vocabulary
+
+![](img/af2_vs_af3_0.drawio.png)
+
+- AlphaFold 3 has 32 unique tokens compared to 21 for AlphaFold 2 
+
+## AlphaFold 3
+### Pairformer
+
+
+
+::: {.columns}
+::: {.column width="70%"}
+![](img/af2_vs_af3_1.drawio.png)
+:::
+
+::: {.column width="30%"}
+- Reduce the importance of MSA 
+- Puts more weight on the pair representation
+:::
+:::
+
+
+
+## AlphaFold 3
+### Diffusion
+
+::: {.columns}
+::: {.column width="70%"}
+![](img/af2_vs_af3_2.drawio.png)
+:::
+
+::: {.column width="30%"}
+- Remove Gaussian noise from a CG molecule 
+- C1' atom per nucleotide for RNA
+:::
+:::
+
+
+## AlphaFold 3
+### Output
+
+::: {.columns}
+::: {.column width="70%"}
+![](img/af2_vs_af3_3.drawio.png)
+:::
+
+::: {.column width="30%"}
+- AF3 outputs a **diffusion loss**, **PAE** (predicted aligned error) and **PDE** (predicted distance error)
+:::
+:::
+
+## AlphaFold 3
+### Architecture
+
+![](img/af3_architecture_0.png)
+
+- Use attention on pair and single representations
+
+## AlphaFold 3
+### Architecture
+
+![](img/af3_architecture_1.png)
+
+## AlphaFold 3
+### Architecture
+
+![](img/af3_architecture_2.png)
+
+
+## AlphaFold 3
+### Benchmark
+
+![Benchmark of 10 existing methods and AlphaFold 3 on 5 datasets](img/R1107_optimized.gif)
+
+
+## AlphaFold 3
+### Limits
+
+![](img/results_viz.png)
+
+## AlphaFold 3
+### Conclusion & limits
+
+- AF3 for RNAs has competitive results 
+- AF3 does not generalise to orphan structures. 
+- AF3 works well with long sequences (biased by redundant structures)
+- Gives more realistic results than state-of-the-art deep learning methods
+
+
+
+
 # RNA quality measurement
 ## RNA quality measurement
 
-![](img/1d_2d_3d_evaluation.drawio.png){width=200%}
+![](img/2d_evaluation_0.drawio.png){width="80%" height="80%" fig-align="center"}
 
-- Evaluation of raw sequence or 2D structure is accessible (F1-score, MCC, ...)
-- RNA 3D structures are complex objects: hard to evaluate (pairing, geometries, etc)
+- Can we evaluate the prediction of RNA 2D structure?
 
 ## RNA quality measurement
 
-![](img/rp14f_pred.drawio.png){width=20% fig-align="center"}
+![](img/2d_evaluation_1.drawio.png){width="80%" height="80%" fig-align="center"}
+
+## RNA quality measurement
+
+![](img/2d_evaluation_2.drawio.png){width="80%" height="80%" fig-align="center"}
+
+## RNA quality measurement
+
+![](img/2d_evaluation_3.drawio.png){width="80%" height="80%" fig-align="center"}
+
+- Easy way to count the prediction error
+
+## RNA quality measurement
+
+![](img/rnadvisor_pred.gif){width="60%" height="60%" fig-align="center"}
+
+- Is this a good RNA 3D structure?
+
+## RNA quality measurement
+
+:::: {.columns }
+
+::: {.column width="50%" }
+
+#### Predicted structure
+![](img/rnadvisor_pred.gif){width=100% fig-align="center"}
+:::
+
+::: {.column width="50%" }
+
+#### Reference structure
+![](img/rnadvisor_true.gif){width=100% fig-align="center"}
+
+:::
+::::
+
+- Is it now a good structure?
+
+## RNA quality measurement
+
+![](img/af3_pred.gif){width=20% fig-align="center"}
 
 **Given a structure, how to assess its quality ?**
 
@@ -450,13 +669,13 @@ $y_{ij}^b$ assesses if the distance of atom pair $(i, j)$ in the target experime
 ::: {.column width="50%" }
 
 #### Predicted structure
-![](img/rp14f_pred.drawio.png){width=50% fig-align="center"}
+![](img/rnadvisor_pred.gif){width=90% fig-align="center"}
 :::
 
 ::: {.column width="50%" }
 
 #### Reference structure
-![](img/ref_rp14f.drawio.png){width=50% fig-align="center"}
+![](img/rnadvisor_true.gif){width=90% fig-align="center"}
 
 :::
 ::::
@@ -464,7 +683,39 @@ $y_{ij}^b$ assesses if the distance of atom pair $(i, j)$ in the target experime
 **Metrics**: Quality measurement given a solved structure
 
 ## Metrics 
-### General metrics
+
+:::: {.columns }
+
+::: {.column width="33%"}
+
+#### General metrics
+![Backbone skeleton of an RNA 3D structure](img/general_metrics.gif){width=70% fig-align="center"}
+
+:::
+
+::: {.column width="33%" }
+
+#### Protein-based
+
+![Protein 3D structure](img/protein_structure.gif){width=100% fig-align="center"}
+
+:::
+
+::: {.column width="33%" }
+
+#### RNA-oriented
+![RNA torsional angles](img/rna_metrics.png){width=100% fig-align="center"}
+
+:::
+
+- Different types of metrics for different use
+::::
+
+
+
+## General metrics
+
+![](img/general_metrics.gif){width=70% fig-align="center"}
 
 - **RMSD**: Atom deviation 
 - **CLASH** (@molprobity): Steric clashes     
@@ -473,13 +724,24 @@ $y_{ij}^b$ assesses if the distance of atom pair $(i, j)$ in the target experime
 ## Metrics 
 ### Protein-based 
 
+![](img/protein_structure.gif){width="100%" fig-align="center"}
+
 - **GDT-TS** (@gdt): Superimposed residues 
 - **TM-score** (@tm-score-rna): Largest deviation 
+
+
+## Metrics 
+### Protein-based 
+
+![](img/protein_structure.gif){width="100%" fig-align="center"}
+
 - **lDDT** (@lddt): Interatomic distance 
 - **CAD-score** (@cad-score): Contact-area 
 
 ## Metrics 
 ### RNA-oriented
+
+![](img/rna_metrics.png){width=100% fig-align="center"}
 
 - **INF, DI** (@inf): Key interactions accuracy 
 - **P-VALUE** (@p-value): Non-randomness
@@ -516,7 +778,7 @@ the predicted model, |TP| = 0, and the INF score equals 0.
 # Scoring functions
 ## Scoring functions
 
-![](img/scoring_fig.drawio.png){fig-align="center" width=105%}
+![](img/scoring_example.png){fig-align="center" width=105%}
 
  
 - When developing models, a lot of structures can be generated and should be ranked
@@ -526,19 +788,43 @@ the predicted model, |TP| = 0, and the INF score equals 0.
 
 **Scoring function**: predict the quality of a structure **without a known reference**
 
-## Scoring functions
+
+## Scoring function
+
+:::: {.columns }
+
+::: {.column width="50%"}
+
+#### Knowledge-based
+![](img/knowledge_based.png){width=70% fig-align="center"}
+
+:::
+
+::: {.column width="50%" }
+
+#### Deep learning
+
+![](img/deep_scoring.png){width=100% fig-align="center"}
+
+:::
+
+::::
+
+
+
+## Scoring function
 ### Knowledged based
 
 Scoring function based on knowledge-based statistical potentials
 
 - **RASP** (@rasp): Pairwise-distances
-- **$\epsilon$SCORE** (@barnaba): Relative positions
+<!-- - **$\epsilon$SCORE** (@barnaba): Relative positions -->
 - **3dRNASCORE** (@3drnascore): Distance/dihedral angles
 - **DFIRE-RNA** (@dfire-rna): Pairwise-distances
 - **rsRNASP** (@rsrnasp): Short/long pairwise distances
 
 
-## Scoring functions
+## Scoring function
 ### Deep learning based
 
 Scoring functions based on deep learning architectures
@@ -546,7 +832,25 @@ Scoring functions based on deep learning architectures
 - **RNA3DCNN** (@rna3dcnn): Atom grid
 - **ARES** (@ares): Atom position/chemical type
 
-## Scoring functions
+## Scoring function
+
+- Scoring function enables the ranking of RNA 3D structures
+
+![](img/scoring_example_0.png){width="100%" fig-align="center"}
+
+## Scoring function
+
+- If we add the native structure in the decoy, would it be well evaluated ?
+
+![](img/scoring_example_1.png){width="100%" fig-align="center"}
+
+## Scoring function
+
+- To evaluate quality of scoring functions, we count the number of times **native structure** is ranked as the **best structure** by the scoring function
+
+![](img/scoring_example_2.png){width="100%" fig-align="center"}
+
+## Scoring function
 ### Example: RNAD3DCNN
 
 - Predict for each nucleotide an unfitness score
@@ -554,7 +858,7 @@ Scoring functions based on deep learning architectures
 - A score of 0 means the nucleotide fits into its environment perfectly (native conformation)
 - For global quality assessment, the unfitness scores of all nucleotides are accumulated
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: inputs
 
 - For each nucleotide, a box of 3 channels represents:
@@ -564,18 +868,18 @@ Scoring functions based on deep learning architectures
 - A box is of size 32x32x32
 - The RGB channels are mapped to the three channels
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: inputs
 
 ![](img/rna3dcnn_inputs.png){fig-align="center"}
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: architecture
 
 ![](img/rna3dcnn_architecture.png){fig-align="center"}
 
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: dataset
 
 - Use of 619 non-redundant RNAs from NDB website
@@ -585,19 +889,19 @@ Scoring functions based on deep learning architectures
 - 1 million training samples and 0.2 million validation for each subdataset
 
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: results
 
 ![Relationship between RMSD and RNA3DCNN for an RNA](img/rna3dcnn_results.png){fig-align="center"}
 
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN: results
 
 ![Number of native structures with minimum scores](img/rna3dcnn_testset.png){fig-align="center"}
 
 
-## Scoring functions
+## Scoring function
 ### RNAD3DCNN
 
 - Try to reproduce RMSD with deep learning approaches
@@ -609,13 +913,20 @@ Scoring functions based on deep learning architectures
 - Training step biased by the sampling procedures 
 - Performances remain limited to novel approaches
 
-## Questions ? 
+## Hands-on
 
-Contact: clement.bernard@univ-evry.fr
+![](img/medium.png){fig-align="center"}
 
-Come to see my poster on Monday 4th, December
+Tutorials available on [Medium](https://medium.com/@clement.bernard.these/rna-3d-structure-in-depth-tutorials-on-how-to-apprehend-this-research-subject-1d138a112f17)
 
-![](img/rnadvisor.png){fig-align="center"}
+## Questions
+
+- Don't hesitate to contact me if you have any question. 
+
+- Mail address: clement.bernard@univ-evry.fr
+
+![](img/blue_rp18.gif){width="80%" fig-align="center"}
+
 
 ## References
 
